@@ -2,9 +2,11 @@
 
 namespace ResourceManagementSystem.Areas.RMS_Organization.Controllers
 {
+    [Area("RMS_Organization")]
+    [Route("{controller}/{action}")]
     public class RMS_OrganizationController : Controller
     {
-        public IActionResult Index()
+        public IActionResult RegisterOrganization()
         {
             return View();
         }

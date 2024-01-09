@@ -12,10 +12,10 @@ namespace ResourceManagementSystem.Areas.Authentication.BAL
             return result;
         }
 
-        public void UpdateLastLogin(string EmployeeEmail)
+        public void UpdateLastLogin(int EmployeeID)
         {
             LoginDal DAL = new();
-            DAL.UpdateLastLogin(EmployeeEmail);
+            DAL.UpdateLastLogin(EmployeeID);
         }
     }
 }

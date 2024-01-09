@@ -1,98 +1,95 @@
 ﻿@{
-    ViewData["Title"] = "Register Employee";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Register Employee";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Models.RMS_OrganizationWiseEmployeeModel
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Register Employee - Star Admin 2 Theme</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Register Employee - Star Admin 2 Theme</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!-- Star Admin 2 Theme CSS -->
-    <link rel="stylesheet" href="~\css\vertical-layout-light\style.css">
+	<!-- Star Admin 2 Theme CSS -->
+	<link rel="stylesheet" href="~\css\vertical-layout-light\style.css">
 </head>
 <body>
-
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="text-center">Register Employee</h3>
-                    </div>
-                    <div class="card-body">
-                        <!-- Registration Form -->
-                        <form asp-controller="RegisterEmployee" asp-action="RegisterEmployee">
-                            <div class="form-group">
-                                <label for="AccessLevelID">Access Level</label>
-                                @Html.TextBoxFor(m => m.AccessLevelID, new { @class = "form-control", @placeholder = "Enter Access Level", @required = "required" })
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.AccessLevelID)</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="EmployeeName">Full Name</label>
-                                @Html.TextBoxFor(m => m.EmployeeName, new { @class = "form-control", @placeholder = "Enter full name of employee", @required = "required" })
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeName)</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="EmployeeContact">Phone Number</label>
-                                @Html.TextBoxFor(m => m.EmployeeContact, new { @class = "form-control", @placeholder = "Enter phone number of employee", @required = "required" })
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeContact)</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="EmployeeEmail">E-mail</label>
-                                @Html.TextBoxFor(m => m.EmployeeEmail, new { @class = "form-control", @placeholder = "Enter e-mail of your employee", @required = "required" })
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeEmail)</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="EmployeeDepartment">Employee Department</label>
-                                @Html.TextBoxFor(m => m.EmployeeDepartment, new { @class = "form-control", @placeholder = "Enter phone number of employee", @required = "required" })
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeDepartment)</span>
-                            </div>
-                            <div class="form-group">
-                                <label>Gender</label>
-                                <div class="form-check">
-                                    @Html.RadioButtonFor(m => m.EmployeeGender, "Male", new { @class = "form-check-input" })
-                                    <label class="form-check-label">Male</label>
-                                </div>
-                                <div class="form-check">
-                                    @Html.RadioButtonFor(m => m.EmployeeGender, "Female", new { @class = "form-check-input" })
-                                    <label class="form-check-label">Female</label>
-                                </div>
-                                <div class="form-check">
-                                    @Html.RadioButtonFor(m => m.EmployeeGender, "Other", new { @class = "form-check-input" })
-                                    <label class="form-check-label">Other</label>
-                                </div>
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeGender)</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password", @required = "required" })
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="ConfirmPassword">Confirm Password</label>
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm your password", @required = "required" })
-                                <span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
-                        </form>
-                        <!-- End Registration Form -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="text-center">Register Employee</h3>
+					</div>
+					<div class="card-body">
+						<!-- Registration Form -->
+						<form asp-area="RMS_OrganizationWiseEmployee" asp-controller="RMS_OrganizationWiseEmployee" asp-action="RegisterEmployee">
+							<div class="form-group">
+								<label for="AccessLevelID">Access Level</label>
+								@Html.TextBoxFor(m => m.AccessLevelID, new { @class = "form-control", @placeholder = "Enter Access Level", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.AccessLevelID)</span>
+							</div>
+							<div class="form-group">
+								<label for="EmployeeName">Full Name</label>
+								@Html.TextBoxFor(m => m.EmployeeName, new { @class = "form-control", @placeholder = "Enter full name of employee", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeName)</span>
+							</div>
+							<div class="form-group">
+								<label for="EmployeeContact">Phone Number</label>
+								@Html.TextBoxFor(m => m.EmployeeContact, new { @class = "form-control", @placeholder = "Enter phone number of employee", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeContact)</span>
+							</div>
+							<div class="form-group">
+								<label for="EmployeeEmail">E-mail</label>
+								@Html.TextBoxFor(m => m.EmployeeEmail, new { @class = "form-control", @placeholder = "Enter e-mail of your employee", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeEmail)</span>
+							</div>
+							<div class="form-group">
+								<label for="EmployeeDepartment">Employee Department</label>
+								@Html.TextBoxFor(m => m.EmployeeDepartment, new { @class = "form-control", @placeholder = "Enter Department of employee", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeDepartment)</span>
+							</div>
+							<div class="form-group">
+								<label>Gender</label>
+								<div class="form-check">
+									@Html.RadioButtonFor(m => m.EmployeeGender, "Male", new { @class = "form-check-input" })
+									<label class="form-check-label">Male</label>
+								</div>
+								<div class="form-check">
+									@Html.RadioButtonFor(m => m.EmployeeGender, "Female", new { @class = "form-check-input" })
+									<label class="form-check-label">Female</label>
+								</div>
+								<div class="form-check">
+									@Html.RadioButtonFor(m => m.EmployeeGender, "Other", new { @class = "form-check-input" })
+									<label class="form-check-label">Other</label>
+								</div>
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeGender)</span>
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								@Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
+							</div>
+							<div class="form-group">
+								<label for="ConfirmPassword">Confirm Password</label>
+								@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm your password", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
+							</div>
+							<button type="submit" class="btn btn-primary btn-block">Register</button>
+						</form>
+						<!-- End Registration Form -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap JS and dependencies -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

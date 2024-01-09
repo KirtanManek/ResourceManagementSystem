@@ -24,10 +24,8 @@
     <Folder Include="Areas\Employee\Data\" />
     <Folder Include="Areas\Employee\Models\" />
     <Folder Include="Areas\Employee\Views\" />
-    <Folder Include="Areas\GlobalAdmin\Controllers\" />
     <Folder Include="Areas\GlobalAdmin\Data\" />
     <Folder Include="Areas\GlobalAdmin\Models\" />
-    <Folder Include="Areas\GlobalAdmin\Views\" />
   </ItemGroup>
 
 </Project>

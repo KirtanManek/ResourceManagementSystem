@@ -2,12 +2,20 @@
 using Microsoft.IdentityModel.Tokens;
 using ResourceManagementSystem.Areas.Authentication.BAL;
 using ResourceManagementSystem.Areas.Authentication.Models;
-using System.Data;
 
 namespace ResourceManagementSystem.Areas.Authentication.Controllers
 {
+    [Area("Authentication")]
+    [Route("{area}/{controller}/{action}")]
     public class LoginController() : Controller
     {
+        [HttpGet]
+        [Route("/Authentication/Login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("/Authentication/Login")]
@@ -15,12 +23,15 @@ namespace ResourceManagementSystem.Areas.Authentication.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (IsValidUser(model))
+                LoginBal bal = new();
+                Dictionary<string, string> result = bal.Login(model);
+                if (!result.IsNullOrEmpty())
                 {
-                    LoginBal bal = new();
-                    bal.UpdateLastLogin(model.EmployeeEmail);
-                    Dictionary<string, string> result = bal.Login(model);
-                    return RedirectToDashboard(result["AccessLevel"]);
+                    bal.UpdateLastLogin(Convert.ToInt32(result["EmployeeID"]));
+                    HttpContext.Session.SetString("SessionKeyAccessLevelName", result["AccessLevelName"].ToString());
+                    HttpContext.Session.SetString("SessionKeyEmployeeEmail", result["EmployeeEmail"].ToString());
+                    HttpContext.Session.SetInt32("SessionKeyOrganizationID", Convert.ToInt32(result["OrganizationID"]));
+                    return RedirectToDashboard(result["AccessLevelName"]);
                 }
                 else
                 {
@@ -37,40 +48,18 @@ namespace ResourceManagementSystem.Areas.Authentication.Controllers
             return View("Login", model);
         }
 
-        #region IsValidUser
-        private bool IsValidUser(LoginModel model)
-        {
-            LoginBal bal = new();
-            Dictionary<string, string> result = bal.Login(model);
-            if (!result.IsNullOrEmpty())
-            {
-                HttpContext.Session.SetInt32("SessionKeyAccessLevelID", Convert.ToInt32(result["AccessLevelID"]));
-                HttpContext.Session.SetString("SessionKeyEmployeeEmail", result["EmployeeEmail"].ToString());
-                HttpContext.Session.SetInt32("SessionKeyOrganizationID", Convert.ToInt32(result["OrganizationID"]));
-                return true;
-            }
-            return false;
-
-        }
-        #endregion
-
         #region Redirect to dashboard
         private RedirectToActionResult RedirectToDashboard(string accessLevel)
         {
-            switch (accessLevel)
-            {
-                case "Global Admin":
-                    return RedirectToAction("GlobalAdminDashboard", "GlobalAdmin", new { area = "GlobalAdmin" });
-                case "Admin":
-                    return RedirectToAction("AdminDashboard", "Admin", new { area = "Admin" });
-                case "Manager":
-                    return RedirectToAction("ManagerDashboard", "Manager", new { area = "Employee" });
-                case "Employee":
-                    return RedirectToAction("EmployeeDashboard", "Employee", new { area = "Employee" });
-                default:
-                    return RedirectToAction("DisplayError", "Error");
-            }
-        }
+			return accessLevel switch
+			{
+				"Global Admin" => RedirectToAction("GlobalAdminDashboard", "GlobalAdmin", new { area = "GlobalAdmin" }),
+				"Admin" => RedirectToAction("AdminDashboard", "Admin", new { area = "Admin" }),
+				"Manager" => RedirectToAction("ManagerDashboard", "Manager", new { area = "Employee" }),
+				"Employee" => RedirectToAction("EmployeeDashboard", "Employee", new { area = "Employee" }),
+				_ => RedirectToAction("DisplayError", "Error"),
+			};
+		}
         #endregion
 
         #region LogOut
@@ -79,7 +68,7 @@ namespace ResourceManagementSystem.Areas.Authentication.Controllers
             try
             {
                 HttpContext.Session.Clear();
-
+                Response.Redirect("/Authentication/Login");
             }
             catch (Exception)
             {
