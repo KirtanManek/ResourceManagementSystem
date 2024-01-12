@@ -7,7 +7,7 @@ namespace ResourceManagementSystem.Areas.RMS_Organization.DAL
     public class RMS_OrganizationDAL : ResourceManagementSystem.DAL.DAL_Helpers
     {
         #region Register Organization
-        public static int RegisterOrganization(RMS_OrganizationModel rms)
+        public int RegisterOrganization(RMS_OrganizationModel rms)
         {
             using SqlConnection conn = new(ConnectionString);
             using SqlCommand cmd = new("PR_RMS_Organization_Insert", conn);
@@ -17,7 +17,7 @@ namespace ResourceManagementSystem.Areas.RMS_Organization.DAL
             cmd.Parameters.AddWithValue("@OrganizationAddress", rms.OrganizationAddress);
             cmd.Parameters.AddWithValue("@OrganizationName", rms.OrganizationName);
             conn.Open();
-            int result = cmd.ExecuteNonQuery();
+            int result = Convert.ToInt32(cmd.ExecuteScalar());
             conn.Close();
             return result;
         }

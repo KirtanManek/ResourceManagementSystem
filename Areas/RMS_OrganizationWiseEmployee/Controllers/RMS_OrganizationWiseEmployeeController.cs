@@ -5,15 +5,16 @@ using ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Models;
 namespace ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Controllers
 {
     [Area("RMS_OrganizationWiseEmployee")]
-    [Route("{area}/{controller}/{action}")]
     public class RMS_OrganizationWiseEmployeeController : Controller
     {
+        [Route("/RegisterEmployee")]
         [HttpGet]
         public IActionResult RegisterEmployee()
         {
             return View();
         }
 
+        [Route("/RegisterEmployee")]
         [HttpPost]
         public IActionResult RegisterEmployee(RMS_OrganizationWiseEmployeeModel rms)
         {
@@ -23,7 +24,7 @@ namespace ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Controller
                 Console.WriteLine("Error in inserting data");
                 ViewData["ErrorMessage"] = "Error in inserting data";
             }
-            return RedirectToAction("GlobalAdminDashboard", "GlobalAdmin", new { area = "GlobalAdmin" });
+            return RedirectToAction("AdminDashboard", "Admin", new { area = "Admin" });
         }
     }
 }

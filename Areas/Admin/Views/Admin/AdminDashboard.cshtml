@@ -1,0 +1,11 @@
+﻿@using ResourceManagementSystem.Models;
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var data = ViewBag.Data;
+}
+<h2>Global Admin Dashboard</h2>
+<br />
+<h2>@data.EmployeeName</h2>
+<a asp-area="RMS_OrganizationWiseEmployee" asp-controller="RMS_OrganizationWiseEmployee" asp-action="RegisterEmployee">Add Employee</a>
+<br />
+<a asp-controller="Login" asp-area="Authentication" asp-action="LogOut">Log-out</a>

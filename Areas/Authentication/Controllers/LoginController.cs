@@ -28,9 +28,11 @@ namespace ResourceManagementSystem.Areas.Authentication.Controllers
                 if (!result.IsNullOrEmpty())
                 {
                     bal.UpdateLastLogin(Convert.ToInt32(result["EmployeeID"]));
+                    HttpContext.Session.SetInt32("SessionKeyEmployeeID", Convert.ToInt32(result["EmployeeID"]));
                     HttpContext.Session.SetString("SessionKeyAccessLevelName", result["AccessLevelName"].ToString());
-                    HttpContext.Session.SetString("SessionKeyEmployeeEmail", result["EmployeeEmail"].ToString());
+					HttpContext.Session.SetString("SessionKeyEmployeeEmail", result["EmployeeEmail"].ToString());
                     HttpContext.Session.SetInt32("SessionKeyOrganizationID", Convert.ToInt32(result["OrganizationID"]));
+                    Console.WriteLine(result["AccessLevelName"]);
                     return RedirectToDashboard(result["AccessLevelName"]);
                 }
                 else

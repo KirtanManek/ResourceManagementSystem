@@ -12,6 +12,7 @@ namespace ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.DAL
             using SqlConnection conn = new(ConnectionString);
             using SqlCommand cmd = new("PR_RMS_OrganizationWiseEmployee_Insert", conn);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@OrganizationID", rms.OrganizationID);
             cmd.Parameters.AddWithValue("@AccessLevelID", rms.AccessLevelID);
             cmd.Parameters.AddWithValue("@EmployeeName", rms.EmployeeName);
             cmd.Parameters.AddWithValue("@EmployeeContact", rms.EmployeeContact);

@@ -1,5 +1,64 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+	ViewData["Title"] = "Register Organization";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model ResourceManagementSystem.Areas.RMS_Organization.Models.RMS_OrganizationModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Register Employee - Star Admin 2 Theme</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+	<!-- Star Admin 2 Theme CSS -->
+	<link rel="stylesheet" href="~\css\vertical-layout-light\style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="text-center">Register Organization</h3>
+					</div>
+					<div class="card-body">
+						<!-- Registration Form -->
+						<form asp-area="RMS_Organization" asp-controller="RMS_Organization" asp-action="RegisterOrganization">
+							<div class="form-group">
+								<label for="OrganizationName">Organization Name</label>
+								@Html.TextBoxFor(m => m.OrganizationName, new { @class = "form-control", @placeholder = "Enter name of Organization", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.OrganizationName)</span>
+							</div>
+							<div class="form-group">
+								<label for="OrganizationContact">Phone Number</label>
+								@Html.TextBoxFor(m => m.OrganizationContact, new { @class = "form-control", @placeholder = "Enter phone number of Organization", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.OrganizationContact)</span>
+							</div>
+							<div class="form-group">
+								<label for="OrganizationEmail">E-mail</label>
+								@Html.TextBoxFor(m => m.OrganizationEmail, new { @class = "form-control", @placeholder = "Enter e-mail of your Organization", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.OrganizationEmail)</span>
+							</div>
+							<div class="form-group">
+								<label for="EmployeeDepartment">Organization Address</label>
+								@Html.TextBoxFor(m => m.OrganizationAddress, new { @class = "form-control", @placeholder = "Enter Organization Address", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.OrganizationAddress)</span>
+							</div>
+							<button type="submit" class="btn btn-primary btn-block">Register</button>
+						</form>
+						<!-- End Registration Form -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap JS and dependencies -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
