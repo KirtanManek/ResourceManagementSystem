@@ -29,9 +29,7 @@
 						<!-- Registration Form -->
 						<form asp-area="RMS_OrganizationWiseEmployee" asp-controller="RMS_OrganizationWiseEmployee" asp-action="RegisterEmployee">
 							<div class="form-group">
-								<label for="AccessLevelID">Access Level</label>
-								@Html.TextBoxFor(m => m.AccessLevelID, new { @class = "form-control", @placeholder = "Enter Access Level", @required = "required" })
-								<span class="text-danger">@Html.ValidationMessageFor(m => m.AccessLevelID)</span>
+								@Html.HiddenFor(m => m.AccessLevelID, new { @value = ViewBag["AccessLevelID"] })
 							</div>
 							<div class="form-group">
 								<label for="EmployeeName">Full Name</label>

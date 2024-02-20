@@ -16,11 +16,10 @@ namespace ResourceManagementSystem.Areas.RMS_Organization.Controllers
 
 		[Route("/RegisterOrganization")]
 		[HttpPost]
-		public IActionResult RegisterOrganization(RMS_OrganizationModel rms)
+		public IActionResult RegisterOrganization(RMS_CombinedOrganizationEmployeeModel comb)
 		{
-			int result = RMS_OrganizationBAL.RegisterOrganization(rms);
-			HttpContext.Session.SetInt32("SessionKeyOrganizationID", result);
-			return RedirectToAction("AdminDashboard", "Admin", new { area = "Admin" });
+			RMS_OrganizationBAL.RegisterOrganization(comb.org, comb.emp);
+			return RedirectToAction("Login", "Login", new { area = "Authentication" });
 		}
 	}
 }

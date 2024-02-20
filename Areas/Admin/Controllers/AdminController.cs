@@ -10,17 +10,16 @@ namespace ResourceManagementSystem.Areas.Admin.Controllers
 		[Route("Admin/Dashboard")]
 		public IActionResult AdminDashboard()
 		{
-			//if (HttpContext.Session.GetString("SessionKeyAccessLevelName") == "Admin")
-			//{
-
-			//}
-			//else
-			//{
-			//	return RedirectToAction("DisplayError", "Error");
-			//}
-			UserModel user = new BAL_Base().GetUser(Convert.ToInt32(HttpContext.Session.GetInt32("SessionKeyEmployeeID")));
-			ViewBag.Data = user;
-			return View();
+			if (HttpContext.Session.GetString("SessionKeyAccessLevelName") == "Admin")
+			{
+				UserModel user = new BAL_Base().GetUser(Convert.ToInt32(HttpContext.Session.GetInt32("SessionKeyEmployeeID")));
+				ViewBag.Data = user;
+				return View();
+			}
+			else
+			{
+				return RedirectToAction("DisplayError", "Error");
+			}
 		}
 	}
 }

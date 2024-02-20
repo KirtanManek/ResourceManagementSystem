@@ -18,7 +18,20 @@ namespace ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Controller
         [HttpPost]
         public IActionResult RegisterEmployee(RMS_OrganizationWiseEmployeeModel rms)
         {
-            int result = RMS_OrganizationWiseEmployeeBAL.RegisterEmployee(rms);
+            string AccessLevel;
+            if(rms.AccessLevelID.Equals(5))
+            {
+				AccessLevel = "Admin";
+			}
+			else if(rms.AccessLevelID.Equals(6))
+            {
+				AccessLevel = "Manager";
+			}
+            else
+            {
+                AccessLevel = "Employee";
+            }
+            int result = RMS_OrganizationWiseEmployeeBAL.RegisterEmployee(rms, AccessLevel);
             if (result != 1)
             {
                 Console.WriteLine("Error in inserting data");

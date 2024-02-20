@@ -16,23 +16,9 @@
 	<link href="~/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-	<!-- ======= Header ======= -->
-	<header id="header" class="header d-flex align-items-center">
-		<div class="align-items-center justify-content-center">
-			<h1 class="text-primary">Resource Management System</h1>
-		</div>
-	</header><!-- End Header -->
-	<hr />
 	<main id="main" class="main">
 		@RenderBody()
-	</main><!-- End #main -->
-	<!-- ======= Footer ======= -->
-	<footer id="footer" class="footer fixed-bottom">
-		<hr />
-		<div class="copyright">
-			&copy; Copyright <strong><span>ResourceManagementSystem</span></strong>. All Rights Reserved
-		</div>
-	</footer><!-- End Footer -->
+	</main>
 	<script src="~/vendor/bootstrap/js/bootstrap.js"></script>
 	@await RenderSectionAsync("Scripts", required: false)
 </body>

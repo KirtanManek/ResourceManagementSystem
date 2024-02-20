@@ -54,8 +54,5 @@ namespace ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Models
         [Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again!")]
         [DataType(DataType.Password)]
         public required string ConfirmPassword { get; set; }
-
-
-        public List<RMS_OrganizationWiseEmployeeModel>? EmployeeInfoList { get; set; }
     }
 }

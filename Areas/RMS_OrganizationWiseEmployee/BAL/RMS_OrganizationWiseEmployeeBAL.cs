@@ -5,9 +5,9 @@ namespace ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.BAL
     public class RMS_OrganizationWiseEmployeeBAL
     {
         #region Register Employee
-        public static int RegisterEmployee(RMS_OrganizationWiseEmployeeModel rms)
+        public static int RegisterEmployee(RMS_OrganizationWiseEmployeeModel rms, string AccessLevel)
         {
-            return DAL.RMS_OrganizationWiseEmployeeDAL.RegisterEmployee(rms);
+            return DAL.RMS_OrganizationWiseEmployeeDAL.RegisterEmployee(rms, AccessLevel);
         }
         #endregion
     }
