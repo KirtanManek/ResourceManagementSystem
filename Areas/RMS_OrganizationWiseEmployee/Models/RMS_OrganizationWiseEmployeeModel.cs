@@ -10,7 +10,7 @@ namespace ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Models
 
         [Required(ErrorMessage = "Please select access level.")]
         [Display(Name = "Access Level")]
-        public required string AccessLevelID { get; set; }
+        public required string AccessLevel { get; set; }
 
 
         [Required(ErrorMessage = "Please enter Employee Name")]

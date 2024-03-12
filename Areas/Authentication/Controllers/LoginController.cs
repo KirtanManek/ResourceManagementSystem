@@ -9,7 +9,7 @@ namespace ResourceManagementSystem.Areas.Authentication.Controllers
     [Route("{area}/{controller}/{action}")]
     public class LoginController() : Controller
     {
-        [HttpGet]
+		[HttpGet]
         [Route("/Authentication/Login")]
         public IActionResult Login()
         {
@@ -32,7 +32,6 @@ namespace ResourceManagementSystem.Areas.Authentication.Controllers
                     HttpContext.Session.SetString("SessionKeyAccessLevelName", result["AccessLevelName"].ToString());
 					HttpContext.Session.SetString("SessionKeyEmployeeEmail", result["EmployeeEmail"].ToString());
                     HttpContext.Session.SetInt32("SessionKeyOrganizationID", Convert.ToInt32(result["OrganizationID"]));
-                    Console.WriteLine(result["AccessLevelName"]);
                     return RedirectToDashboard(result["AccessLevelName"]);
                 }
                 else
@@ -47,7 +46,7 @@ namespace ResourceManagementSystem.Areas.Authentication.Controllers
                 ViewData["LoginError"] = "Invalid Model";
                 ViewData["ErrorMessage"] = "Invalid Model";
             }
-            return View("Login", model);
+            return View("Login");
         }
 
         #region Redirect to dashboard

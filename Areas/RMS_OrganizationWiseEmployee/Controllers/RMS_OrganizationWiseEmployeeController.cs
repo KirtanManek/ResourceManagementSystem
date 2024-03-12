@@ -5,33 +5,30 @@ using ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Models;
 namespace ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Controllers
 {
     [Area("RMS_OrganizationWiseEmployee")]
+    [Route("[controller]/[action]")]
     public class RMS_OrganizationWiseEmployeeController : Controller
     {
-        [Route("/RegisterEmployee")]
+        //[Route("/RegisterEmployee")]
         [HttpGet]
-        public IActionResult RegisterEmployee()
+        public IActionResult RegisterEmployee(string AccessLevel)
         {
-            return View();
+			RMS_OrganizationWiseEmployeeViewModel Employee = new()
+			{
+				AccessLevel = AccessLevel
+			};
+			return View(Employee);
         }
 
-        [Route("/RegisterEmployee")]
+        //[Route("/RegisterEmployee")]
         [HttpPost]
-        public IActionResult RegisterEmployee(RMS_OrganizationWiseEmployeeModel rms)
+        public IActionResult RegisterEmployee(RMS_OrganizationWiseEmployeeViewModel Employee)
         {
-            string AccessLevel;
-            if(rms.AccessLevelID.Equals(5))
+
+            if(HttpContext.Session.GetInt32("SessionKeyOrganizationID") == null)
             {
-				AccessLevel = "Admin";
-			}
-			else if(rms.AccessLevelID.Equals(6))
-            {
-				AccessLevel = "Manager";
-			}
-            else
-            {
-                AccessLevel = "Employee";
+                return RedirectToAction("Login", "Login", new { area = "Authentication" });
             }
-            int result = RMS_OrganizationWiseEmployeeBAL.RegisterEmployee(rms, AccessLevel);
+            int result = RMS_OrganizationWiseEmployeeBAL.RegisterEmployee(Employee.Rms, (int)HttpContext.Session.GetInt32("SessionKeyOrganizationID"), Employee.AccessLevel);
             if (result != 1)
             {
                 Console.WriteLine("Error in inserting data");

@@ -5,7 +5,6 @@ using ResourceManagementSystem.Models;
 namespace ResourceManagementSystem.Areas.GlobalAdmin.Controllers
 {
     [Area("GlobalAdmin")]
-    [CheckAccess]
     public class GlobalAdminController : Controller
     {
         [Route("GlobalAdmin/Dashboard")]

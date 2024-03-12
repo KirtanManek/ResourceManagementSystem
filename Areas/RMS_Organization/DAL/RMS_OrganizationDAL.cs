@@ -19,11 +19,10 @@ namespace ResourceManagementSystem.Areas.RMS_Organization.DAL
             cmd.Parameters.AddWithValue("@OrganizationAddress", org.OrganizationAddress);
             cmd.Parameters.AddWithValue("@OrganizationName", org.OrganizationName);
             conn.Open();
-            int result = Convert.ToInt32(cmd.ExecuteScalar());
+			org.OrganizationID = Convert.ToInt32(cmd.ExecuteScalar());
             conn.Close();
             emp.EmployeeEmail = org.OrganizationEmail;
-            emp.OrganizationID = result;
-            RMS_OrganizationWiseEmployeeDAL.RegisterEmployee(emp, "Admin");
+            RMS_OrganizationWiseEmployeeDAL.RegisterEmployee(emp, org.OrganizationID, "Admin");
         }
         #endregion
     }

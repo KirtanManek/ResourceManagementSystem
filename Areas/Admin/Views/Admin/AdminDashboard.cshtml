@@ -1,11 +1,113 @@
-﻿@using ResourceManagementSystem.Models;
+﻿@model DataTable
+@using System.Data;
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
-	var data = ViewBag.Data;
+	var data = ViewBag.data;
 }
-<h2>Admin Dashboard</h2>
-<br />
-<h2>@data.EmployeeName</h2>
-<a asp-area="RMS_OrganizationWiseEmployee" asp-controller="RMS_OrganizationWiseEmployee" asp-action="RegisterEmployee">Add Employee</a>
-<br />
-<a asp-controller="Login" asp-area="Authentication" asp-action="LogOut">Log-out</a>
+<div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="~/img/logo.png" alt="Venue Manager Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Venue Manager
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a asp-controller="Login" asp-area="Authentication" asp-action="LogOut" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Jumbotron -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Welcome to Venue Manager Admin Dashboard of @data.EmployeeName!</h1>
+            <p class="lead">This is a website that manages all the physical resources (venues) of any organization. You can register your organization, login, and book venues for your events.</p>
+        </div>
+    </div>
+    <!-- Cards -->
+    <div class="row">
+        <!-- Buttons card -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="buttons">
+                        @using (Html.BeginForm("RegisterEmployee", "RMS_OrganizationWiseEmployee", FormMethod.Get))
+                        {
+                            <input type="hidden" name="AccessLevel" value="Employee" />
+                            <input type="submit" value="Add Employee" class="btn btn-primary btn-block" />
+
+                            <input type="hidden" name="AccessLevel" value="Manager" />
+                            <input type="submit" value="Add Manager" class="btn btn-primary btn-block" />
+                        }   
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Count card -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="count">
+                        <p>Total employees: @Model.Rows.Count</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <!-- List card -->
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Employees</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Gender</th>
+                                    <th>Last Login</th>
+                                    <th align="center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow dataRow in Model.Rows)
+								{
+									<tr>
+										<td>@dataRow["EmployeeName"]</td>
+										<td>@dataRow["EmployeeContact"]</td>
+										<td>@dataRow["EmployeeEmail"]</td>
+										<td>@dataRow["EmployeeDepartment"]</td>
+										<td>@dataRow["EmployeeGender"]</td>
+										<td>@dataRow["LastLogin"]</td>
+										<td>
+											<a class="btn btn-sm btn-warning">&nbsp;Edit&nbsp;</a>
+											<a class="btn btn-sm btn-danger">Delete</a>
+										</td>
+									</tr>
+								}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

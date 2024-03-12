@@ -2,7 +2,7 @@
 	ViewData["Title"] = "Register Employee";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Models.RMS_OrganizationWiseEmployeeModel
+@model ResourceManagementSystem.Areas.RMS_OrganizationWiseEmployee.Models.RMS_OrganizationWiseEmployeeViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,56 +29,48 @@
 						<!-- Registration Form -->
 						<form asp-area="RMS_OrganizationWiseEmployee" asp-controller="RMS_OrganizationWiseEmployee" asp-action="RegisterEmployee">
 							<div class="form-group">
-								@Html.HiddenFor(m => m.AccessLevelID, new { @value = ViewBag["AccessLevelID"] })
+								@Html.HiddenFor(m => m.AccessLevel)
 							</div>
 							<div class="form-group">
 								<label for="EmployeeName">Full Name</label>
-								@Html.TextBoxFor(m => m.EmployeeName, new { @class = "form-control", @placeholder = "Enter full name of employee", @required = "required" })
-								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeName)</span>
+								@Html.TextBoxFor(m => m.Rms.EmployeeName, new { @class = "form-control", @placeholder = "Enter full name of employee", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.Rms.EmployeeName)</span>
 							</div>
 							<div class="form-group">
 								<label for="EmployeeContact">Phone Number</label>
-								@Html.TextBoxFor(m => m.EmployeeContact, new { @class = "form-control", @placeholder = "Enter phone number of employee", @required = "required" })
-								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeContact)</span>
+								@Html.TextBoxFor(m => m.Rms.EmployeeContact, new { @class = "form-control", @placeholder = "Enter phone number of employee", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.Rms.EmployeeContact)</span>
 							</div>
 							<div class="form-group">
 								<label for="EmployeeEmail">E-mail</label>
-								@Html.TextBoxFor(m => m.EmployeeEmail, new { @class = "form-control", @placeholder = "Enter e-mail of your employee", @required = "required" })
-								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeEmail)</span>
-							</div>
-							<div class="form-group">
-								<label for="EmployeeDepartment">Employee Department</label>
-								@Html.TextBoxFor(m => m.EmployeeDepartment, new { @class = "form-control", @placeholder = "Enter Department of employee", @required = "required" })
-								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeDepartment)</span>
+								@Html.TextBoxFor(m => m.Rms.EmployeeEmail, new { @class = "form-control", @placeholder = "Enter e-mail of your employee", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.Rms.EmployeeEmail)</span>
 							</div>
 							<div class="form-group">
 								<label>Gender</label>
 								<div class="form-check">
-									@Html.RadioButtonFor(m => m.EmployeeGender, "Male", new { @class = "form-check-input" })
+									@Html.RadioButtonFor(m => m.Rms.EmployeeGender, "Male", new { @class = "form-check-input" })
 									<label class="form-check-label">Male</label>
 								</div>
 								<div class="form-check">
-									@Html.RadioButtonFor(m => m.EmployeeGender, "Female", new { @class = "form-check-input" })
+									@Html.RadioButtonFor(m => m.Rms.EmployeeGender, "Female", new { @class = "form-check-input" })
 									<label class="form-check-label">Female</label>
 								</div>
 								<div class="form-check">
-									@Html.RadioButtonFor(m => m.EmployeeGender, "Other", new { @class = "form-check-input" })
+									@Html.RadioButtonFor(m => m.Rms.EmployeeGender, "Other", new { @class = "form-check-input" })
 									<label class="form-check-label">Other</label>
 								</div>
-								<span class="text-danger">@Html.ValidationMessageFor(m => m.EmployeeGender)</span>
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.Rms.EmployeeGender)</span>
 							</div>
 							<div class="form-group">
 								<label for="password">Password</label>
-								@Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password", @required = "required" })
-								<span class="text-danger">@Html.ValidationMessageFor(m => m.Password)</span>
+								@Html.PasswordFor(m => m.Rms.Password, new { @class = "form-control", @placeholder = "Enter your password", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.Rms.Password)</span>
 							</div>
 							<div class="form-group">
 								<label for="ConfirmPassword">Confirm Password</label>
-								@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm your password", @required = "required" })
-								<span class="text-danger">@Html.ValidationMessageFor(m => m.ConfirmPassword)</span>
-							</div>
-							<div class="form-group">
-								@Html.HiddenFor(m => m.OrganizationID, new { @value = Context.Session.GetInt32("SessionKeyOrganizationID") })
+								@Html.PasswordFor(m => m.Rms.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm your password", @required = "required" })
+								<span class="text-danger">@Html.ValidationMessageFor(m => m.Rms.ConfirmPassword)</span>
 							</div>
 							<button type="submit" class="btn btn-primary btn-block">Register</button>
 						</form>
